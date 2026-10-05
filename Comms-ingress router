@@ -1,4 +1,4 @@
-name: comms-ingress-router
+name: Comms Agent SKill.md
 description: Network ingress skills for the COMMS bay — long-poll the Pretty Ricky Telegram channel, wrap inbound traffic in a raw_packet envelope, and mint the run id. Use when the COMMS agent is listening for external notifications and writing raw packets to the outbound line.
 bay: 00-comms
 stage_id: comms
