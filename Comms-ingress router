@@ -1,0 +1,33 @@
+name: comms-ingress-router
+description: Network ingress skills for the COMMS bay — long-poll the Pretty Ricky Telegram channel, wrap inbound traffic in a raw_packet envelope, and mint the run id. Use when the COMMS agent is listening for external notifications and writing raw packets to the outbound line.
+bay: 00-comms
+stage_id: comms
+stage_next: scalper
+allowed-tools: telegram.listen, envelope.wrap, run_id.mint, halt.check
+
+COMMS AGENT — SKILLS
+Skill name: Comms Ingress Router
+Skill
+Signature
+Purpose
+
+telegram.listen
+() -> {text, attachments}
+Long-poll the Pretty Ricky channel; return raw message text and attachments.
+
+envelope.wrap
+(raw) -> raw_packet
+Pure function; performs no parsing of the content.
+
+run_id.mint
+() -> string
+Collision-safe id generator.
+
+halt.check
+() -> bool
+Returns true if HALT_FLAG exists; halts all outbound writes.
+
+Guard condition
+If raw_content is empty after trim, log and drop — never forward an empty packet.
+Output contract
+Emits <RUN_ID>-raw.json to CONVEYOR_OUTBOX; the payload is wrapped, never analyzed.
